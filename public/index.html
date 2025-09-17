@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Health & Wellness Hub - Karnataka Government & UNICEF</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1><i class="fas fa-heartbeat"></i> Health & Wellness Hub</h1>
+                <p>Government of Karnataka & UNICEF Initiative</p>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn" data-section="home">Home</button>
+                <button class="nav-btn" data-section="modules">E-Modules</button>
+                <button class="nav-btn" data-section="resources">Resources</button>
+                <button class="nav-btn" data-section="helplines">Helplines</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="container">
+                <div class="hero">
+                    <h2>Welcome to Your One-Stop Wellness Hub</h2>
+                    <p>Designed for adolescents and youth to learn, grow, and stay healthy. Access videos, interactive modules, take quizzes, and earn certificates!</p>
+                    <div class="stats">
+                        <div class="stat">
+                            <i class="fas fa-play-circle"></i>
+                            <h3>Interactive Videos</h3>
+                            <p>Watch engaging educational content</p>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-book-open"></i>
+                            <h3>E-Modules</h3>
+                            <p>Learn through structured modules</p>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-trophy"></i>
+                            <h3>Certificates</h3>
+                            <p>Earn certificates in real-time</p>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-phone"></i>
+                            <h3>24/7 Support</h3>
+                            <p>Access helpline numbers</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- E-Modules Section -->
+        <section id="modules" class="section">
+            <div class="container">
+                <h2>E-Learning Modules</h2>
+                <div id="modules-grid" class="modules-grid">
+                    <!-- Modules will be loaded dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resources" class="section">
+            <div class="container">
+                <h2>Health & Wellness Resources</h2>
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <i class="fas fa-utensils"></i>
+                        <h3>Nutrition Guidelines</h3>
+                        <p>Essential nutrition information for adolescents including balanced diet charts and healthy eating habits.</p>
+                        <a href="#" class="btn">Download PDF</a>
+                    </div>
+                    <div class="resource-card">
+                        <i class="fas fa-running"></i>
+                        <h3>Exercise Routines</h3>
+                        <p>Age-appropriate exercise plans and physical activities to maintain fitness and mental well-being.</p>
+                        <a href="#" class="btn">Download PDF</a>
+                    </div>
+                    <div class="resource-card">
+                        <i class="fas fa-brain"></i>
+                        <h3>Mental Health Guide</h3>
+                        <p>Understanding mental health, stress management techniques, and when to seek professional help.</p>
+                        <a href="#" class="btn">Download PDF</a>
+                    </div>
+                    <div class="resource-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Safety Guidelines</h3>
+                        <p>Comprehensive safety information including road safety, internet safety, and personal security.</p>
+                        <a href="#" class="btn">Download PDF</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Helplines Section -->
+        <section id="helplines" class="section">
+            <div class="container">
+                <h2>Emergency & Support Helplines</h2>
+                <div id="helplines-grid" class="helplines-grid">
+                    <!-- Helplines will be loaded dynamically -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for Module Content -->
+    <div id="module-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="module-content">
+                <!-- Module content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Quiz -->
+    <div id="quiz-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="quiz-content">
+                <!-- Quiz content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading indicator -->
+    <div id="loading" class="loading hidden">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Government of Karnataka in collaboration with UNICEF. All rights reserved.</p>
+            <p>Empowering adolescents and youth with health and wellness knowledge.</p>
+        </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>
