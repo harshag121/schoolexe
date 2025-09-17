@@ -1,0 +1,76 @@
+2025-09-17 22:49:50,184 - teen_chatbot - INFO - All services initialized successfully
+2025-09-17 22:49:50,184 - teen_chatbot - INFO - All services initialized successfully
+2025-09-17 22:49:50,239 - teen_chatbot - INFO - Starting server on 0.0.0.0:8000
+2025-09-17 22:49:50,239 - teen_chatbot - INFO - Starting server on 0.0.0.0:8000
+2025-09-17 22:52:58,885 - teen_chatbot - INFO - Request: GET http://localhost:8000/health from 127.0.0.1
+2025-09-17 22:52:58,885 - teen_chatbot - INFO - Request: GET http://localhost:8000/health from 127.0.0.1
+2025-09-17 22:53:02,963 - teen_chatbot - INFO - Response: 200 in 4.078s
+2025-09-17 22:53:02,963 - teen_chatbot - INFO - Response: 200 in 4.078s
+2025-09-17 22:53:02,982 - teen_chatbot - INFO - Request: GET http://localhost:8000/health from 127.0.0.1
+2025-09-17 22:53:02,982 - teen_chatbot - INFO - Request: GET http://localhost:8000/health from 127.0.0.1
+2025-09-17 22:53:07,078 - teen_chatbot - INFO - Response: 200 in 4.096s
+2025-09-17 22:53:07,078 - teen_chatbot - INFO - Response: 200 in 4.096s
+2025-09-17 22:53:55,299 - teen_chatbot - INFO - Request: OPTIONS http://localhost:8000/chat from 127.0.0.1
+2025-09-17 22:53:55,299 - teen_chatbot - INFO - Request: OPTIONS http://localhost:8000/chat from 127.0.0.1
+2025-09-17 22:53:55,300 - teen_chatbot - INFO - Response: 200 in 0.001s
+2025-09-17 22:53:55,300 - teen_chatbot - INFO - Response: 200 in 0.001s
+2025-09-17 22:53:55,312 - teen_chatbot - INFO - Request: POST http://localhost:8000/chat from 127.0.0.1
+2025-09-17 22:53:55,312 - teen_chatbot - INFO - Request: POST http://localhost:8000/chat from 127.0.0.1
+2025-09-17 22:53:55,319 - teen_chatbot - INFO - Chat request from 127.0.0.1: How can I eat healthier as a teenager?...
+2025-09-17 22:53:55,319 - teen_chatbot - INFO - Chat request from 127.0.0.1: How can I eat healthier as a teenager?...
+2025-09-17 22:53:59,409 - teen_chatbot - INFO - Generating response for 127.0.0.1
+2025-09-17 22:53:59,409 - teen_chatbot - INFO - Generating response for 127.0.0.1
+2025-09-17 22:54:04,035 - teen_chatbot - INFO - Response generated for 127.0.0.1 in 8.716s
+2025-09-17 22:54:04,035 - teen_chatbot - INFO - Response generated for 127.0.0.1 in 8.716s
+2025-09-17 22:54:04,041 - teen_chatbot - INFO - Response: 200 in 8.729s
+2025-09-17 22:54:04,041 - teen_chatbot - INFO - Response: 200 in 8.729s
+2025-09-17 22:54:04,065 - teen_chatbot - INFO - Request: GET http://localhost:8000/follow-up/user_1758129778532_sagdbiuyy?topic=nutrition from 127.0.0.1
+2025-09-17 22:54:04,065 - teen_chatbot - INFO - Request: GET http://localhost:8000/follow-up/user_1758129778532_sagdbiuyy?topic=nutrition from 127.0.0.1
+2025-09-17 22:54:04,067 - teen_chatbot - INFO - Response: 200 in 0.001s
+2025-09-17 22:54:04,067 - teen_chatbot - INFO - Response: 200 in 0.001s
+2025-09-17 22:54:10,500 - teen_chatbot - INFO - Request: POST http://localhost:8000/chat from 127.0.0.1
+2025-09-17 22:54:10,500 - teen_chatbot - INFO - Request: POST http://localhost:8000/chat from 127.0.0.1
+2025-09-17 22:54:10,502 - teen_chatbot - INFO - Chat request from 127.0.0.1: hey...
+2025-09-17 22:54:10,502 - teen_chatbot - INFO - Chat request from 127.0.0.1: hey...
+2025-09-17 22:54:14,605 - teen_chatbot - INFO - Generating response for 127.0.0.1
+2025-09-17 22:54:14,605 - teen_chatbot - INFO - Generating response for 127.0.0.1
+2025-09-17 22:54:19,063 - teen_chatbot - INFO - Response generated for 127.0.0.1 in 8.561s
+2025-09-17 22:54:19,063 - teen_chatbot - INFO - Response generated for 127.0.0.1 in 8.561s
+2025-09-17 22:54:19,064 - teen_chatbot - INFO - Response: 200 in 8.564s
+2025-09-17 22:54:19,064 - teen_chatbot - INFO - Response: 200 in 8.564s
+2025-09-17 22:57:01,412 - teen_chatbot - INFO - All services initialized successfully
+2025-09-17 22:57:01,412 - teen_chatbot - INFO - All services initialized successfully
+2025-09-17 22:57:01,471 - teen_chatbot - INFO - Starting server on 0.0.0.0:8000
+2025-09-17 22:57:01,471 - teen_chatbot - INFO - Starting server on 0.0.0.0:8000
+2025-09-17 22:57:17,087 - teen_chatbot - INFO - Request: GET http://localhost:8000/health from 127.0.0.1
+2025-09-17 22:57:17,087 - teen_chatbot - INFO - Request: GET http://localhost:8000/health from 127.0.0.1
+2025-09-17 22:57:21,149 - teen_chatbot - INFO - Response: 200 in 4.062s
+2025-09-17 22:57:21,149 - teen_chatbot - INFO - Response: 200 in 4.062s
+2025-09-17 22:57:21,160 - teen_chatbot - INFO - Request: GET http://localhost:8000/health from 127.0.0.1
+2025-09-17 22:57:21,160 - teen_chatbot - INFO - Request: GET http://localhost:8000/health from 127.0.0.1
+2025-09-17 22:57:25,268 - teen_chatbot - INFO - Response: 200 in 4.108s
+2025-09-17 22:57:25,268 - teen_chatbot - INFO - Response: 200 in 4.108s
+2025-09-17 22:57:30,556 - teen_chatbot - INFO - Request: POST http://localhost:8000/chat from 127.0.0.1
+2025-09-17 22:57:30,556 - teen_chatbot - INFO - Request: POST http://localhost:8000/chat from 127.0.0.1
+2025-09-17 22:57:30,559 - teen_chatbot - INFO - Chat request from 127.0.0.1: Hey...
+2025-09-17 22:57:30,559 - teen_chatbot - INFO - Chat request from 127.0.0.1: Hey...
+2025-09-17 22:57:34,634 - teen_chatbot - INFO - Generating response for 127.0.0.1
+2025-09-17 22:57:34,634 - teen_chatbot - INFO - Generating response for 127.0.0.1
+2025-09-17 22:57:41,777 - teen_chatbot - INFO - Response generated for 127.0.0.1 in 11.218s
+2025-09-17 22:57:41,777 - teen_chatbot - INFO - Response generated for 127.0.0.1 in 11.218s
+2025-09-17 22:57:41,778 - teen_chatbot - INFO - Response: 200 in 11.222s
+2025-09-17 22:57:41,778 - teen_chatbot - INFO - Response: 200 in 11.222s
+2025-09-17 22:58:09,082 - teen_chatbot - INFO - Request: POST http://localhost:8000/chat from 127.0.0.1
+2025-09-17 22:58:09,082 - teen_chatbot - INFO - Request: POST http://localhost:8000/chat from 127.0.0.1
+2025-09-17 22:58:09,083 - teen_chatbot - INFO - Chat request from 127.0.0.1: Give me 5 MCQ on how to get more protein...
+2025-09-17 22:58:09,083 - teen_chatbot - INFO - Chat request from 127.0.0.1: Give me 5 MCQ on how to get more protein...
+2025-09-17 22:58:13,167 - teen_chatbot - INFO - Generating response for 127.0.0.1
+2025-09-17 22:58:13,167 - teen_chatbot - INFO - Generating response for 127.0.0.1
+2025-09-17 22:58:20,893 - teen_chatbot - INFO - Response generated for 127.0.0.1 in 11.809s
+2025-09-17 22:58:20,893 - teen_chatbot - INFO - Response generated for 127.0.0.1 in 11.809s
+2025-09-17 22:58:20,894 - teen_chatbot - INFO - Response: 200 in 11.812s
+2025-09-17 22:58:20,894 - teen_chatbot - INFO - Response: 200 in 11.812s
+2025-09-17 23:56:03,981 - teen_chatbot - INFO - All services initialized successfully
+2025-09-17 23:56:03,981 - teen_chatbot - INFO - All services initialized successfully
+2025-09-17 23:56:04,256 - teen_chatbot - INFO - Starting server on 0.0.0.0:8000
+2025-09-17 23:56:04,256 - teen_chatbot - INFO - Starting server on 0.0.0.0:8000
