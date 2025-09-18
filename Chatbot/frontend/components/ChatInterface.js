@@ -1,16 +1,18 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Send, Menu, X } from 'lucide-react';
+import { Send, Menu, X, History } from 'lucide-react';
 import { chatAPI } from '@/lib/api';
 import { sessionManager } from '@/lib/session';
 import { clientCache } from '@/lib/cache';
 import { debugAPI } from '@/lib/debug';
+import { chatHistoryManager } from '@/lib/chatHistory';
 import HealthTopics from './HealthTopics';
 import FollowUpQuestions from './FollowUpQuestions';
 import MCQQuiz from './MCQQuiz';
 import MCQFormatter from './MCQFormatter';
 import PopularPrompts from './PopularPrompts';
+import ChatHistorySidebar from './ChatHistorySidebar';
 
 export default function ChatInterface() {
   const [messages, setMessages] = useState([
@@ -30,6 +32,7 @@ export default function ChatInterface() {
   const [showFollowUps, setShowFollowUps] = useState(false);
   const [showMCQ, setShowMCQ] = useState(false);
   const [connectionStatus, setConnectionStatus] = useState('checking');
+  const [showHistorySidebar, setShowHistorySidebar] = useState(false);
   const messagesEndRef = useRef(null);
 
   // Initialize session on mount
@@ -59,7 +62,17 @@ export default function ChatInterface() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+    
+    // Save current session to history
+    if (userId && sessionId && messages.length > 1) {
+      const userMessages = messages.filter(m => !m.isBot);
+      const botMessages = messages.filter(m => m.isBot);
+      
+      if (userMessages.length > 0) {
+        chatHistoryManager.updateSessionMessages(userId, sessionId, messages);
+      }
+    }
+  }, [messages, userId, sessionId]);
 
   const handleTopicSelect = (topic, description) => {
     setShowTopics(false);
@@ -109,6 +122,13 @@ export default function ChatInterface() {
         if (cachedResponse.topic) {
           setLastTopic(cachedResponse.topic);
           setShowFollowUps(true);
+          
+          // Update session in history
+          chatHistoryManager.saveSession(userId, {
+            sessionId,
+            topic: cachedResponse.topic,
+            summary: text.substring(0, 60) + (text.length > 60 ? '...' : ''),
+          });
         } else if (suggestedTopic) {
           setLastTopic(suggestedTopic);
           setShowFollowUps(true);
@@ -135,6 +155,17 @@ export default function ChatInterface() {
       if (response.topic) {
         setLastTopic(response.topic);
         setShowFollowUps(true);
+        
+        // Save session with topic metadata
+        chatHistoryManager.saveSession(userId, {
+          sessionId,
+          topic: response.topic,
+          summary: text.substring(0, 60) + (text.length > 60 ? '...' : ''),
+          messages: [...messages, 
+            { id: Date.now().toString() + Math.random(), text, isBot: false, timestamp: new Date() },
+            { id: Date.now().toString() + Math.random() + 1, text: response.response, isBot: true, timestamp: new Date() }
+          ]
+        });
       } else if (suggestedTopic) {
         setLastTopic(suggestedTopic);
         setShowFollowUps(true);
@@ -191,63 +222,120 @@ export default function ChatInterface() {
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
 
+  const handleNewChat = () => {
+    // Clear current session and start fresh
+    sessionManager.clearSession();
+    const newSessionId = sessionManager.getSessionId();
+    setSessionId(newSessionId);
+    setMessages([
+      {
+        id: '1',
+        text: 'Hi there! I\'m here to help answer your health questions. You can ask me anything about nutrition, fitness, mental health, or growing up. Click on a popular question below or type your own!',
+        isBot: true,
+        timestamp: new Date(),
+      }
+    ]);
+    setLastTopic(null);
+    setShowFollowUps(false);
+    setShowTopics(false);
+    setShowHistorySidebar(false);
+  };
+
+  const handleSessionSelect = (session) => {
+    // Load selected session
+    if (session.messages) {
+      setMessages(session.messages);
+      setSessionId(session.sessionId);
+      setLastTopic(session.topic);
+      setShowHistorySidebar(false);
+    }
+  };
+
   return (
-    <div className="flex flex-col h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white shadow-sm border-b p-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-              <span className="text-blue-600 font-semibold text-lg">🤖</span>
-            </div>
-            <div>
-              <h1 className="text-xl font-semibold text-gray-800">AdolAI chatbot</h1>
-              <div className="flex items-center gap-2 text-xs">
-                <div className={`w-2 h-2 rounded-full ${
-                  connectionStatus === 'connected' ? 'bg-green-500' : 
-                  connectionStatus === 'error' ? 'bg-red-500' : 'bg-yellow-500'
-                }`}></div>
-                <span className="text-gray-600">
-                  {connectionStatus === 'connected' ? 'Connected' : 
-                   connectionStatus === 'error' ? 'Connection Error' : 'Connecting...'}
-                </span>
+    <div className="flex h-screen bg-gray-50">
+      {/* Chat History Sidebar */}
+      <ChatHistorySidebar
+        userId={userId}
+        currentSessionId={sessionId}
+        onSessionSelect={handleSessionSelect}
+        onNewChat={handleNewChat}
+        isVisible={showHistorySidebar}
+        onClose={() => setShowHistorySidebar(false)}
+      />
+      
+      {/* Main Chat Interface */}
+      <div className="flex flex-col flex-1 min-w-0">
+        {/* Header */}
+        <div className="bg-white shadow-sm border-b p-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => setShowHistorySidebar(!showHistorySidebar)}
+                className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors lg:hidden"
+                title="Toggle chat history"
+              >
+                <History size={20} />
+              </button>
+              
+              <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                <span className="text-blue-600 font-semibold text-lg">🤖</span>
+              </div>
+              <div>
+                <h1 className="text-xl font-semibold text-gray-800">AdolAI chatbot</h1>
+                <div className="flex items-center gap-2 text-xs">
+                  <div className={`w-2 h-2 rounded-full ${
+                    connectionStatus === 'connected' ? 'bg-green-500' : 
+                    connectionStatus === 'error' ? 'bg-red-500' : 'bg-yellow-500'
+                  }`}></div>
+                  <span className="text-gray-600">
+                    {connectionStatus === 'connected' ? 'Connected' : 
+                     connectionStatus === 'error' ? 'Connection Error' : 'Connecting...'}
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={async () => {
-                console.log('🔍 Running connection test...');
-                const result = await debugAPI.testConnection();
-                if (result.success) {
-                  setConnectionStatus('connected');
-                  addMessage('✅ Connection test successful!', true);
-                } else {
-                  setConnectionStatus('error');
-                  addMessage(`❌ Connection test failed: ${result.error}`, true);
-                }
-              }}
-              className="px-2 py-1 text-xs bg-blue-100 text-blue-700 rounded hover:bg-blue-200 transition-colors"
-              title="Test backend connection"
-            >
-              🔍 Test
-            </button>
-            <button
-              onClick={() => setShowMCQ(!showMCQ)}
-              className="px-3 py-1 text-sm bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition-colors"
-              title="Take a health quiz"
-            >
-              🧠 Quiz
-            </button>
-            <button
-              onClick={() => setShowTopics(!showTopics)}
-              className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors"
-            >
-              {showTopics ? <X size={20} /> : <Menu size={20} />}
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setShowHistorySidebar(!showHistorySidebar)}
+                className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors hidden lg:block"
+                title="Toggle chat history"
+              >
+                <History size={20} />
+              </button>
+              
+              <button
+                onClick={async () => {
+                  console.log('🔍 Running connection test...');
+                  const result = await debugAPI.testConnection();
+                  if (result.success) {
+                    setConnectionStatus('connected');
+                    addMessage('✅ Connection test successful!', true);
+                  } else {
+                    setConnectionStatus('error');
+                    addMessage(`❌ Connection test failed: ${result.error}`, true);
+                  }
+                }}
+                className="px-2 py-1 text-xs bg-blue-100 text-blue-700 rounded hover:bg-blue-200 transition-colors"
+                title="Test backend connection"
+              >
+                🔍 Test
+              </button>
+              <button
+                onClick={() => setShowMCQ(!showMCQ)}
+                className="px-3 py-1 text-sm bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition-colors"
+                title="Take a health quiz"
+              >
+                🧠 Quiz
+              </button>
+              <button
+                onClick={() => setShowTopics(!showTopics)}
+                className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                {showTopics ? <X size={20} /> : <Menu size={20} />}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
 
       {/* Messages Area */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
@@ -387,6 +475,7 @@ export default function ChatInterface() {
           />
         </div>
       )}
+      </div>
     </div>
   );
 }
